@@ -103,25 +103,26 @@ namespace TrancityContentManager
                 else
                 {
                     return;
-                }
+                }   
             }
 
             for (int i = 0; i < modsListView.SelectedItems.Count; i++)
             {
-                using WebClient client = new WebClient();
-                
-                int modIndex = modsList.ToList().FindIndex(x => x.Name == modsListView.SelectedItems[i].Text);
-               
-                string fileName = Settings.ExecutablePath + "/" + Path.GetFileName(modsList[modIndex].DownloadLink);
-                
-                statusLabel.Text = $"Downloading {i + 1}/{modsListView.SelectedItems.Count}";
-                client.DownloadProgressChanged += OnDownloadProgressChanged;
+                using (WebClient client = new WebClient())
+                {
+                    int modIndex = modsList.ToList().FindIndex(x => x.Name == modsListView.SelectedItems[i].Text);
 
-                await client.DownloadFileTaskAsync(new Uri(modsList[modIndex].DownloadLink), fileName);
-               
-                statusLabel.Text = $"Extracting {i + 1}/{modsListView.SelectedItems.Count}";
+                    string fileName = Settings.ExecutablePath + "/" + Path.GetFileName(modsList[modIndex].DownloadLink);
 
-                ExtractFile(fileName, Settings.ExecutablePath + "/data/objects/");
+                    statusLabel.Text = $"Downloading {i + 1}/{modsListView.SelectedItems.Count}";
+                    client.DownloadProgressChanged += OnDownloadProgressChanged;
+
+                    await client.DownloadFileTaskAsync(new Uri(modsList[modIndex].DownloadLink), fileName);
+
+                    statusLabel.Text = $"Extracting {i + 1}/{modsListView.SelectedItems.Count}";
+
+                    ExtractFile(fileName, Settings.ExecutablePath + "/data/objects/");
+                }
             }
 
             statusLabel.Text = "Ready.";

@@ -5,8 +5,8 @@ namespace TrancityContentManager
 {
     public interface INetworkModsProvider
     {
-        public Task<ModInfo[]> GetModsFromServer(IProgress<int> progress);
+        Task<ModInfo[]> GetModsFromServer(IProgress<int> progress);
 
-        public string DownloadMod(ModInfo modInfo);
+        string DownloadMod(ModInfo modInfo);
     }
 }

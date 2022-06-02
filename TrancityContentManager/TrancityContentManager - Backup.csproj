@@ -12,7 +12,6 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
-    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
